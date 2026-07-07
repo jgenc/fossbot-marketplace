@@ -1,0 +1,27 @@
+{
+  "marketplaceVersion": 1,
+  "repoOwner": "jgenc",
+  "repoName": "fossbot-untitled-stage",
+  "repoUrl": "https://github.com/jgenc/fossbot-untitled-stage",
+  "defaultBranch": "main",
+  "commitSha": "26dc96dc8f8150b8b0619c2d826a5979214a725c",
+  "title": "Test",
+  "description": "test stage",
+  "tags": [
+    "test",
+    "simple"
+  ],
+  "previewPath": null,
+  "previewUrl": null,
+  "author": {
+    "platformUsername": "admin",
+    "githubUsername": "jgenc"
+  },
+  "forkedFrom": null,
+  "badges": {
+    "verified": false,
+    "validation": "unvalidated"
+  },
+  "publishedAt": "2026-07-07T14:47:06Z",
+  "updatedAt": "2026-07-07T14:47:06Z"
+}
