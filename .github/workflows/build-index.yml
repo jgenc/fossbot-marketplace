@@ -1,0 +1,31 @@
+ # .github/workflows/build-index.yml
+ name: Build marketplace index
+
+ on:
+   push:
+     branches: [main]
+     paths:
+       - 'stages/**/*.json'
+       - 'scripts/build-marketplace-index.mjs'
+
+ permissions:
+   contents: write
+
+ jobs:
+   build-index:
+     runs-on: ubuntu-latest
+     steps:
+       - uses: actions/checkout@v4
+         with:
+           fetch-depth: 0
+       - uses: actions/setup-node@v4
+         with:
+           node-version: 20
+       - name: Build index
+         run: node scripts/build-marketplace-index.mjs .
+       - name: Commit updated index
+         uses: stefanzweifel/git-auto-commit-action@v5
+         with:
+           commit_message: 'chore: rebuild marketplace index'
+           file_pattern: index.json
+
