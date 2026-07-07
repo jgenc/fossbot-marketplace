@@ -1,31 +1,33 @@
- # .github/workflows/build-index.yml
- name: Build marketplace index
+name: Build marketplace index
 
- on:
-   push:
-     branches: [main]
-     paths:
-       - 'stages/**/*.json'
-       - 'scripts/build-marketplace-index.mjs'
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'stages/**/*.json'
+      - 'scripts/build-marketplace-index.mjs'
+      - '.github/workflows/build-index.yml'
 
- permissions:
-   contents: write
+permissions:
+  contents: write
+  checks: write
 
- jobs:
-   build-index:
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v4
-         with:
-           fetch-depth: 0
-       - uses: actions/setup-node@v4
-         with:
-           node-version: 20
-       - name: Build index
-         run: node scripts/build-marketplace-index.mjs .
-       - name: Commit updated index
-         uses: stefanzweifel/git-auto-commit-action@v5
-         with:
-           commit_message: 'chore: rebuild marketplace index'
-           file_pattern: index.json
-
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate stages and build index
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build-marketplace-index.mjs . --validate-stage-repos --write-entry-validation --check-run
+      - name: Commit updated marketplace index
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'chore: rebuild marketplace index'
+          file_pattern: index.json stages/**/*.json

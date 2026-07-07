@@ -1,24 +1,26 @@
- # .github/workflows/validate-marketplace.yml
- name: Validate marketplace
+name: Validate marketplace
 
- on:
-   pull_request:
-     paths:
-       - 'stages/**/*.json'
-       - 'scripts/build-marketplace-index.mjs'
-       - '.github/workflows/validate-marketplace.yml'
+on:
+  pull_request:
+    paths:
+      - 'stages/**/*.json'
+      - 'scripts/build-marketplace-index.mjs'
+      - '.github/workflows/validate-marketplace.yml'
 
- permissions:
-   contents: read
+permissions:
+  contents: read
+  checks: write
 
- jobs:
-   validate:
-     runs-on: ubuntu-latest
-     steps:
-       - uses: actions/checkout@v4
-       - uses: actions/setup-node@v4
-         with:
-           node-version: 20
-       - name: Validate marketplace entries
-         run: node scripts/build-marketplace-index.mjs .
-
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate marketplace entries
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          FOSSBOT_MARKETPLACE_CHECK_SHA: ${{ github.event.pull_request.head.sha }}
+        run: node scripts/build-marketplace-index.mjs . --validate-stage-repos --check-run --fail-on-error
