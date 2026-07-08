@@ -23,5 +23,18 @@
     "validation": "unvalidated"
   },
   "publishedAt": "2026-07-07T14:47:06Z",
-  "updatedAt": "2026-07-07T14:47:06Z"
+  "updatedAt": "2026-07-07T14:47:06Z",
+  "validation": {
+    "state": "unvalidated",
+    "commitSha": "26dc96dc8f8150b8b0619c2d826a5979214a725c",
+    "checkedAt": "2026-07-07T15:15:30.447Z",
+    "checkRunUrl": null,
+    "message": "Entry commit 26dc96dc8f8150b8b0619c2d826a5979214a725c is stale; main is now 3d91b0aa0cffdc73cc450c8c5b35747ab17e9577."
+  },
+  "verification": {
+    "verified": false,
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "reviewPullRequest": null
+  }
 }
