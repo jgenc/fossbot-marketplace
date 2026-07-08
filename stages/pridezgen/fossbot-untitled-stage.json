@@ -1,0 +1,39 @@
+{
+  "marketplaceVersion": 1,
+  "repoOwner": "pridezgen",
+  "repoName": "fossbot-untitled-stage",
+  "repoUrl": "https://github.com/pridezgen/fossbot-untitled-stage",
+  "defaultBranch": "main",
+  "commitSha": "cb30cd250bc80a2c0f5be061fb634f226dcb886d",
+  "title": "Untitled Stage",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque faucibus ante a eros congue interdum. Praesent suscipit urna nisi. Phasellus vulputate id nibh a ultricies. Morbi lobortis velit et aliquam luctus. Phasellus mattis et nisi ut blandit. Ut imperdiet elit vel sapien sollicitudin, sit amet consequat ipsum lacinia. Phasellus aliquam finibus purus, ac pulvinar eros placerat ac. Vivamus in neque eu felis vehicula dictum. Sed convallis ex libero. Duis a auctor massa, a lobortis diam. Maecenas eu ante massa. Suspendisse potenti. Etiam lobortis enim a quam aliquet, in pharetra odio consectetur. Praesent semper, ex vitae semper aliquet, ligula eros ornare odio, id porta magna dolor sit amet enim. Nunc risus nisl, ultrices sit amet ante vitae, varius cursus nisi.\n\nFusce tincidunt, neque quis consequat faucibus, lectus lectus pretium mi, ut feugiat libero ex eu elit. Ut at rhoncus mi. Aenean placerat accumsan lectus eget viverra. Sed vitae consectetur mauris. Curabitur ac lorem mi. Integer auctor pretium dolor, ac iaculis ex fringilla dignissim. Nulla bibendum tempus augue ac varius. Integer dolor mi, dictum a congue eget, tincidunt id dui. Mauris at eleifend felis, ut posuere nibh. Integer hendrerit risus diam, quis luctus nibh tincidunt et. Mauris ut finibus erat.\n\nSuspendisse porttitor lacus eget augue sodales iaculis. Praesent quis odio luctus, scelerisque mi finibus, lacinia massa. Morbi lacus nulla, hendrerit ac massa eu, condimentum semper dolor. Vivamus at finibus mauris, ut imperdiet ligula. Pellentesque pulvinar vehicula suscipit. Donec fringilla diam purus, vel imperdiet tortor efficitur quis. Curabitur vitae libero fringilla leo porta elementum ac non quam.\n\nMauris id est a velit feugiat aliquam. Curabitur auctor lectus augue, at ullamcorper felis interdum ut. In ut risus turpis. Mauris vitae augue in tortor pulvinar malesuada sed ac ligula. Vivamus sollicitudin consequat rutrum. Duis pulvinar vulputate orci, vel iaculis leo condimentum eget. Quisque pharetra pulvinar eros, in auctor elit euismod quis. Aliquam sagittis tortor vitae pharetra maximus. Nullam ac tellus neque. Aliquam neque justo, aliquam ut augue eu, iaculis vulputate elit.\n\nMaecenas non mauris sagittis risus maximus aliquam. Nullam mauris justo, rutrum nec mollis at, efficitur id ligula. Maecenas luctus at augue in rhoncus. Suspendisse elementum efficitur ligula, vitae vehicula leo euismod id. Vestibulum est lectus, fringilla congue auctor ut, gravida nec nisl. Aliquam sodales sem quis ipsum congue porta. Nullam blandit feugiat lorem, eget ultrices nibh commodo in. Phasellus eget dolor id quam ornare ullamcorper. Nunc vestibulum congue fermentum. Morbi metus ante, dapibus vitae enim id, mollis fringilla ipsum. Sed vitae pulvinar nisi, a elementum tellus. Cras in sem velit. Donec fermentum volutpat rutrum. Duis porttitor rhoncus elit eu gravida. Sed id sem in augue iaculis eleifend. Nam convallis odio orci, id gravida velit fringilla ut.",
+  "tags": [
+    "line"
+  ],
+  "previewPath": "preview.png",
+  "previewUrl": "https://raw.githubusercontent.com/pridezgen/fossbot-untitled-stage/main/preview.png",
+  "author": {
+    "platformUsername": "a",
+    "githubUsername": "pridezgen"
+  },
+  "forkedFrom": null,
+  "badges": {
+    "verified": false,
+    "validation": "unvalidated"
+  },
+  "validation": {
+    "state": "unvalidated",
+    "commitSha": "cb30cd250bc80a2c0f5be061fb634f226dcb886d",
+    "checkedAt": null,
+    "checkRunUrl": null,
+    "message": "Pending marketplace CI validation."
+  },
+  "verification": {
+    "verified": false,
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "reviewPullRequest": null
+  },
+  "publishedAt": "2026-07-08T09:39:00Z",
+  "updatedAt": "2026-07-08T09:39:00Z"
+}
