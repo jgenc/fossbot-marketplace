@@ -17,14 +17,14 @@
   "forkedFrom": null,
   "badges": {
     "verified": false,
-    "validation": "unvalidated"
+    "validation": "validated"
   },
   "validation": {
-    "state": "unvalidated",
+    "state": "validated",
     "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
-    "checkedAt": null,
+    "checkedAt": "2026-07-08T20:07:37.084Z",
     "checkRunUrl": null,
-    "message": "Pending marketplace CI validation."
+    "message": "Current stage commit passed marketplace validation."
   },
   "verification": {
     "verified": false,
