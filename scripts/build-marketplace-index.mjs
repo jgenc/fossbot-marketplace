@@ -209,12 +209,15 @@ async function validateStageRepo(entry) {
     const [stage, manifest, license] = await Promise.all([
       readRepoJson(entry.repoOwner, entry.repoName, entry.commitSha, 'stage.json'),
       readRepoJson(entry.repoOwner, entry.repoName, entry.commitSha, 'fossbot.json'),
-      readRepoText(entry.repoOwner, entry.repoName, entry.commitSha, 'LICENSE'),
+      readRepoText(entry.repoOwner, entry.repoName, entry.commitSha, 'LICENSE').catch(() => ''),
     ])
     if (!stage || typeof stage !== 'object' || !stage.config) throw new Error('stage.json must contain a FOSSBot stage record with config')
     verifyManifest(manifest, entry)
     if (!license.trim() || license.includes('Replace this stub with the full CC-BY-4.0 license text')) {
-      throw new Error('LICENSE must contain the stage sharing terms selected during marketplace publishing')
+      return {
+        state: 'unvalidated',
+        message: 'This legacy snapshot needs to be republished once to choose a marketplace sharing license.',
+      }
     }
     return { state: 'validated', message: 'Published stage snapshot passed marketplace validation.' }
   } catch (error) {

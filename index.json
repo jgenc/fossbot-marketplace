@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-08T20:07:38.766Z",
+  "generatedAt": "2026-07-10T17:01:22.872Z",
   "schemaVersion": 1,
   "stages": [
     {
@@ -9,11 +9,13 @@
       "repoUrl": "https://github.com/jgenc/fossbot-demo",
       "defaultBranch": "main",
       "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
+      "stageUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/stage.json",
+      "rawBaseUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/",
       "title": "Demo",
       "description": "Demo stage showcasing all capabilities.",
       "tags": [],
       "previewPath": "preview.png",
-      "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/main/preview.png",
+      "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/preview.png",
       "author": {
         "platformUsername": "",
         "githubUsername": "jgenc"
@@ -21,20 +23,21 @@
       "forkedFrom": null,
       "badges": {
         "verified": false,
-        "validation": "validated"
+        "validation": "unvalidated"
       },
       "validation": {
-        "state": "validated",
+        "state": "unvalidated",
         "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
-        "checkedAt": "2026-07-08T20:07:37.084Z",
+        "checkedAt": "2026-07-10T17:01:20.648Z",
         "checkRunUrl": null,
-        "message": "Current stage commit passed marketplace validation."
+        "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
       },
       "verification": {
         "verified": false,
         "reviewedAt": null,
         "reviewedBy": null,
-        "reviewPullRequest": null
+        "reviewPullRequest": null,
+        "reviewedEntryHash": null
       },
       "publishedAt": "2026-07-08T20:06:52Z",
       "updatedAt": "2026-07-08T20:06:52Z"
@@ -46,6 +49,8 @@
       "repoUrl": "https://github.com/jgenc/fossbot-untitled-stage",
       "defaultBranch": "main",
       "commitSha": "26dc96dc8f8150b8b0619c2d826a5979214a725c",
+      "stageUrl": "https://raw.githubusercontent.com/jgenc/fossbot-untitled-stage/26dc96dc8f8150b8b0619c2d826a5979214a725c/stage.json",
+      "rawBaseUrl": "https://raw.githubusercontent.com/jgenc/fossbot-untitled-stage/26dc96dc8f8150b8b0619c2d826a5979214a725c/",
       "title": "Test",
       "description": "test stage",
       "tags": [
@@ -68,15 +73,16 @@
       "validation": {
         "state": "unvalidated",
         "commitSha": "26dc96dc8f8150b8b0619c2d826a5979214a725c",
-        "checkedAt": "2026-07-08T20:07:37.084Z",
+        "checkedAt": "2026-07-10T17:01:20.648Z",
         "checkRunUrl": null,
-        "message": "Entry commit 26dc96dc8f8150b8b0619c2d826a5979214a725c is stale; main is now 3d91b0aa0cffdc73cc450c8c5b35747ab17e9577."
+        "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
       },
       "verification": {
         "verified": false,
         "reviewedAt": null,
         "reviewedBy": null,
-        "reviewPullRequest": null
+        "reviewPullRequest": null,
+        "reviewedEntryHash": null
       }
     }
   ]
