@@ -29,7 +29,7 @@
   "validation": {
     "state": "unvalidated",
     "commitSha": "26dc96dc8f8150b8b0619c2d826a5979214a725c",
-    "checkedAt": "2026-07-10T17:01:20.648Z",
+    "checkedAt": "2026-07-10T17:43:05.071Z",
     "checkRunUrl": null,
     "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
   },
