@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { Buffer } from 'node:buffer'
+import { createHash } from 'node:crypto'
 import { execFile } from 'node:child_process'
 import { readdir, readFile, writeFile } from 'node:fs/promises'
 import { join, relative } from 'node:path'
@@ -10,6 +11,8 @@ const execFileAsync = promisify(execFile)
 
 const validationStates = new Set(['validated', 'unvalidated', 'error'])
 const requiredFields = ['repoOwner', 'repoName', 'repoUrl', 'defaultBranch', 'commitSha', 'title', 'author', 'badges', 'publishedAt', 'updatedAt']
+const commitShaPattern = /^(?:[0-9a-f]{40}|[0-9a-f]{64})$/i
+const previewPathPattern = /^[A-Za-z0-9_.-]+(?:\/[A-Za-z0-9_.-]+)*$/
 
 function parseArgs(argv) {
   const options = {
@@ -80,11 +83,51 @@ function requireField(entry, field, file) {
   }
 }
 
+function canonicalEntryHash(entry) {
+  const reviewedPayload = {
+    marketplaceVersion: entry.marketplaceVersion,
+    repoOwner: entry.repoOwner,
+    repoName: entry.repoName,
+    defaultBranch: entry.defaultBranch,
+    commitSha: entry.commitSha,
+    title: entry.title,
+    description: entry.description,
+    tags: entry.tags || [],
+    previewPath: entry.previewPath ?? null,
+    author: entry.author || {},
+    forkedFrom: entry.forkedFrom ?? null,
+  }
+  const sortValue = (value) => {
+    if (Array.isArray(value)) return value.map(sortValue)
+    if (value && typeof value === 'object') {
+      return Object.fromEntries(Object.keys(value).sort().map((key) => [key, sortValue(value[key])]))
+    }
+    return value
+  }
+  const canonicalJson = JSON.stringify(sortValue(reviewedPayload))
+  return `sha256:${createHash('sha256').update(canonicalJson).digest('hex')}`
+}
+
+function rawGithubUrl(entry, path = '') {
+  return `https://raw.githubusercontent.com/${entry.repoOwner}/${entry.repoName}/${entry.commitSha}/${path}`
+}
+
 function validateEntry(entry, file) {
   if (entry.marketplaceVersion !== 1) throw new Error(`${file}: marketplaceVersion must be 1`)
   for (const field of requiredFields) requireField(entry, field, file)
   if (!entry.repoName.startsWith('fossbot-')) throw new Error(`${file}: repoName must start with fossbot-`)
+  if (entry.repoUrl !== `https://github.com/${entry.repoOwner}/${entry.repoName}`) throw new Error(`${file}: repoUrl must match repoOwner and repoName`)
+  if (!commitShaPattern.test(entry.commitSha)) throw new Error(`${file}: commitSha must be a full Git commit SHA`)
   if (!Array.isArray(entry.tags)) throw new Error(`${file}: tags must be an array`)
+  if (entry.previewPath && (!previewPathPattern.test(entry.previewPath) || entry.previewPath.split('/').some((part) => part === '.' || part === '..'))) {
+    throw new Error(`${file}: previewPath must be a relative repository path`)
+  }
+  const expectedStageUrl = rawGithubUrl(entry, 'stage.json')
+  const expectedRawBaseUrl = rawGithubUrl(entry)
+  const expectedPreviewUrl = entry.previewPath ? rawGithubUrl(entry, entry.previewPath) : null
+  if (entry.stageUrl != null && entry.stageUrl !== expectedStageUrl) throw new Error(`${file}: stageUrl must reference commitSha`)
+  if (entry.rawBaseUrl != null && entry.rawBaseUrl !== expectedRawBaseUrl) throw new Error(`${file}: rawBaseUrl must reference commitSha`)
+  if (entry.previewUrl != null && entry.previewUrl !== expectedPreviewUrl) throw new Error(`${file}: previewUrl must reference commitSha`)
   if (typeof entry.badges?.verified !== 'boolean') throw new Error(`${file}: badges.verified must be a boolean`)
   if (!validationStates.has(entry.badges?.validation)) throw new Error(`${file}: invalid badges.validation`)
   if (entry.validation) {
@@ -93,6 +136,9 @@ function validateEntry(entry, file) {
   }
   if (entry.verification && entry.verification.verified !== entry.badges.verified) {
     throw new Error(`${file}: verification.verified must match badges.verified`)
+  }
+  if (entry.badges.verified && entry.verification?.reviewedEntryHash !== canonicalEntryHash(entry)) {
+    throw new Error(`${file}: verified badge does not match verification.reviewedEntryHash`)
   }
 }
 
@@ -134,6 +180,14 @@ async function readRepoJson(owner, repo, ref, path) {
   return JSON.parse(Buffer.from(payload.content, 'base64').toString('utf8'))
 }
 
+async function readRepoText(owner, repo, ref, path) {
+  const payload = await githubJson(`/repos/${owner}/${repo}/contents/${encodePath(path)}?ref=${encodeURIComponent(ref)}`)
+  if (payload?.encoding !== 'base64' || typeof payload.content !== 'string') {
+    throw new Error(`${path} is missing or is not base64 content`)
+  }
+  return Buffer.from(payload.content, 'base64').toString('utf8')
+}
+
 function verifyManifest(manifest, entry) {
   if (manifest.kind !== 'fossbot-stage') throw new Error('fossbot.json kind must be fossbot-stage')
   const storage = manifest.storage || {}
@@ -150,23 +204,19 @@ async function validateStageRepo(entry) {
     const repo = await githubJson(`/repos/${entry.repoOwner}/${entry.repoName}`)
     if (repo.private) throw new Error('Stage repository must be public')
 
-    const branch = await githubJson(`/repos/${entry.repoOwner}/${entry.repoName}/commits/${encodeURIComponent(entry.defaultBranch)}`)
-    const branchSha = branch?.sha
-    if (!branchSha) throw new Error(`Could not resolve ${entry.defaultBranch}`)
-    if (branchSha !== entry.commitSha) {
-      return {
-        state: 'unvalidated',
-        message: `Entry commit ${entry.commitSha} is stale; ${entry.defaultBranch} is now ${branchSha}.`,
-      }
-    }
+    await githubJson(`/repos/${entry.repoOwner}/${entry.repoName}/commits/${encodeURIComponent(entry.commitSha)}`)
 
-    const [stage, manifest] = await Promise.all([
+    const [stage, manifest, license] = await Promise.all([
       readRepoJson(entry.repoOwner, entry.repoName, entry.commitSha, 'stage.json'),
       readRepoJson(entry.repoOwner, entry.repoName, entry.commitSha, 'fossbot.json'),
+      readRepoText(entry.repoOwner, entry.repoName, entry.commitSha, 'LICENSE'),
     ])
     if (!stage || typeof stage !== 'object' || !stage.config) throw new Error('stage.json must contain a FOSSBot stage record with config')
     verifyManifest(manifest, entry)
-    return { state: 'validated', message: 'Current stage commit passed marketplace validation.' }
+    if (!license.trim() || license.includes('Replace this stub with the full CC-BY-4.0 license text')) {
+      throw new Error('LICENSE must contain the stage sharing terms selected during marketplace publishing')
+    }
+    return { state: 'validated', message: 'Published stage snapshot passed marketplace validation.' }
   } catch (error) {
     return { state: 'error', message: error instanceof Error ? error.message : String(error) }
   }
@@ -185,12 +235,19 @@ function applyValidation(entry, result, checkedAt) {
     message: result.message,
   }
   entry.verification = entry.verification || {
-    verified: entry.badges.verified,
+    verified: false,
     reviewedAt: null,
     reviewedBy: null,
     reviewPullRequest: null,
+    reviewedEntryHash: null,
   }
-  entry.verification.verified = entry.badges.verified
+  const verificationIsCurrent = Boolean(
+    entry.badges.verified
+    && entry.verification.verified
+    && entry.verification.reviewedEntryHash === canonicalEntryHash(entry),
+  )
+  entry.badges.verified = verificationIsCurrent
+  entry.verification.verified = verificationIsCurrent
 }
 
 function buildIndex(entries) {
@@ -260,15 +317,16 @@ async function main() {
   const outPath = join(options.root, options.indexPath)
   const checkedAt = new Date().toISOString()
 
-  let stageFiles = []
+  const stageFiles = []
   for await (const file of walk(stagesDir)) stageFiles.push(file)
   stageFiles.sort()
 
+  let changedStageFiles = null
   if (options.changedStageFiles) {
     const changed = await changedStageEntryPaths(options.root)
     if (changed) {
-      stageFiles = stageFiles.filter((file) => changed.has(relative(options.root, file)))
-      console.log(`Validating ${stageFiles.length} changed stage entr${stageFiles.length === 1 ? 'y' : 'ies'}.`)
+      changedStageFiles = changed
+      console.log(`Validating ${changed.size} changed stage entr${changed.size === 1 ? 'y' : 'ies'} while building the complete index.`)
     }
   }
 
@@ -291,6 +349,7 @@ async function main() {
   if (!schemaErrors.length && options.validateStageRepos) {
     for (let index = 0; index < entries.length; index += 1) {
       const entry = entries[index]
+      if (changedStageFiles && !changedStageFiles.has(relative(options.root, entryFiles[index]))) continue
       const result = await validateStageRepo(entry)
       applyValidation(entry, result, checkedAt)
       results.push({ name: `${entry.repoOwner}/${entry.repoName}`, ...result })
