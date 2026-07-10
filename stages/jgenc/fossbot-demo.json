@@ -1,0 +1,37 @@
+{
+  "marketplaceVersion": 1,
+  "repoOwner": "jgenc",
+  "repoName": "fossbot-demo",
+  "repoUrl": "https://github.com/jgenc/fossbot-demo",
+  "defaultBranch": "main",
+  "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
+  "title": "Demo",
+  "description": "Demo stage showcasing all capabilities.",
+  "tags": [],
+  "previewPath": "preview.png",
+  "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/main/preview.png",
+  "author": {
+    "platformUsername": "",
+    "githubUsername": "jgenc"
+  },
+  "forkedFrom": null,
+  "badges": {
+    "verified": false,
+    "validation": "validated"
+  },
+  "validation": {
+    "state": "validated",
+    "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
+    "checkedAt": "2026-07-08T20:07:37.084Z",
+    "checkRunUrl": null,
+    "message": "Current stage commit passed marketplace validation."
+  },
+  "verification": {
+    "verified": false,
+    "reviewedAt": null,
+    "reviewedBy": null,
+    "reviewPullRequest": null
+  },
+  "publishedAt": "2026-07-08T20:06:52Z",
+  "updatedAt": "2026-07-08T20:06:52Z"
+}
