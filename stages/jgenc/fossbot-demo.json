@@ -4,14 +4,12 @@
   "repoName": "fossbot-demo",
   "repoUrl": "https://github.com/jgenc/fossbot-demo",
   "defaultBranch": "main",
-  "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
-  "stageUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/stage.json",
-  "rawBaseUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/",
+  "commitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
   "title": "Demo",
   "description": "Demo stage showcasing all capabilities.",
   "tags": [],
   "previewPath": "preview.png",
-  "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bbdc163fda2035c4d6f3a48e3784cf0503525c97/preview.png",
+  "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/main/preview.png",
   "author": {
     "platformUsername": "",
     "githubUsername": "jgenc"
@@ -23,10 +21,10 @@
   },
   "validation": {
     "state": "unvalidated",
-    "commitSha": "bbdc163fda2035c4d6f3a48e3784cf0503525c97",
-    "checkedAt": "2026-07-14T09:23:23.749Z",
+    "commitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
+    "checkedAt": null,
     "checkRunUrl": null,
-    "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
+    "message": "Pending marketplace CI validation."
   },
   "verification": {
     "verified": false,
@@ -35,6 +33,12 @@
     "reviewPullRequest": null,
     "reviewedEntryHash": null
   },
+  "sourceStatus": {
+    "state": "current",
+    "sourceCommitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
+    "checkedAt": null,
+    "message": "The published revision is being revalidated."
+  },
   "publishedAt": "2026-07-08T20:06:52Z",
-  "updatedAt": "2026-07-08T20:06:52Z"
+  "updatedAt": "2026-07-14T09:32:06Z"
 }
