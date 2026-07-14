@@ -16,7 +16,7 @@
   },
   "forkedFrom": null,
   "badges": {
-    "verified": false,
+    "verified": true,
     "validation": "unvalidated"
   },
   "validation": {
@@ -27,11 +27,18 @@
     "message": "Pending marketplace CI validation."
   },
   "verification": {
-    "verified": false,
-    "reviewedAt": null,
-    "reviewedBy": null,
+    "verified": true,
+    "reviewedAt": "2026-07-14T10:34:00Z",
+    "reviewedBy": "jgenc",
     "reviewPullRequest": null,
-    "reviewedEntryHash": null
+    "checklist": {
+      "stageRuns": true,
+      "metadataAccurate": true,
+      "attributionAcceptable": true,
+      "contentAppropriate": true,
+      "categoriesAppropriate": true
+    },
+    "notes": null
   },
   "sourceStatus": {
     "state": "current",
@@ -40,5 +47,5 @@
     "message": "The published revision is being revalidated."
   },
   "publishedAt": "2026-07-08T20:06:52Z",
-  "updatedAt": "2026-07-14T09:32:06Z"
+  "updatedAt": "2026-07-14T10:34:00Z"
 }
