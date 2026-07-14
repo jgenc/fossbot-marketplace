@@ -4,49 +4,41 @@
   "repoName": "fossbot-demo",
   "repoUrl": "https://github.com/jgenc/fossbot-demo",
   "defaultBranch": "main",
-  "commitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
+  "commitSha": "bc514c448018632c4021e01ff8f1394b503c8605",
   "title": "Demo",
   "description": "Demo stage showcasing all capabilities.",
   "tags": [],
   "previewPath": "preview.png",
-  "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/b75903ee323a0e1962b4a9addf702a701cf2ad9d/preview.png",
+  "previewUrl": "https://raw.githubusercontent.com/jgenc/fossbot-demo/bc514c448018632c4021e01ff8f1394b503c8605/preview.png",
   "author": {
     "platformUsername": "",
     "githubUsername": "jgenc"
   },
   "forkedFrom": null,
   "badges": {
-    "verified": true,
+    "verified": false,
     "validation": "unvalidated"
   },
   "validation": {
     "state": "unvalidated",
-    "commitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
-    "checkedAt": "2026-07-14T10:51:54.149Z",
+    "commitSha": "bc514c448018632c4021e01ff8f1394b503c8605",
+    "checkedAt": null,
     "checkRunUrl": null,
-    "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
+    "message": "Pending marketplace CI validation."
   },
   "verification": {
-    "verified": true,
-    "reviewedAt": "2026-07-14T10:51:20Z",
-    "reviewedBy": "jgenc",
+    "verified": false,
+    "reviewedAt": null,
+    "reviewedBy": null,
     "reviewPullRequest": null,
-    "reviewedEntryHash": "sha256:7805b39395137d5344f347367056c91c3cfed235bb43b6f94bdec5de77218cfd",
-    "checklist": {
-      "stageRuns": true,
-      "metadataAccurate": true,
-      "attributionAcceptable": true,
-      "contentAppropriate": true,
-      "categoriesAppropriate": true
-    },
-    "notes": null
+    "reviewedEntryHash": null
   },
   "sourceStatus": {
     "state": "current",
-    "sourceCommitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
+    "sourceCommitSha": "bc514c448018632c4021e01ff8f1394b503c8605",
     "checkedAt": null,
     "message": "The published revision is being revalidated."
   },
   "publishedAt": "2026-07-08T20:06:52Z",
-  "updatedAt": "2026-07-14T10:51:20Z"
+  "updatedAt": "2026-07-14T11:12:08Z"
 }
