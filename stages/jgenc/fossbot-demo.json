@@ -22,7 +22,7 @@
   "validation": {
     "state": "validated",
     "commitSha": "bc514c448018632c4021e01ff8f1394b503c8605",
-    "checkedAt": "2026-07-14T11:12:51.410Z",
+    "checkedAt": "2026-07-14T11:17:00.011Z",
     "checkRunUrl": null,
     "message": "Published stage snapshot passed marketplace validation."
   },
