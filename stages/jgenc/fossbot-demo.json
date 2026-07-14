@@ -22,9 +22,9 @@
   "validation": {
     "state": "unvalidated",
     "commitSha": "b75903ee323a0e1962b4a9addf702a701cf2ad9d",
-    "checkedAt": null,
+    "checkedAt": "2026-07-14T10:51:54.149Z",
     "checkRunUrl": null,
-    "message": "Pending marketplace CI validation."
+    "message": "This legacy snapshot needs to be republished once to choose a marketplace sharing license."
   },
   "verification": {
     "verified": true,
